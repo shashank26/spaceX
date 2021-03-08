@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from './shared.module';
 import { HttpClientInterceptor } from './http-interceptors/http-client.interceptor';
 import { FormsModule } from '@angular/forms';
+import {TransferHttpCacheModule} from '@nguniversal/common';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,9 @@ import { FormsModule } from '@angular/forms';
     FilterTemplateComponent,
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({ appId: 'app-root' }),
     BrowserTransferStateModule,
+    TransferHttpCacheModule,
     AppRoutingModule,
     HttpClientModule,
     SharedModule,

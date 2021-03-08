@@ -30,9 +30,9 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
-  server.get('https://api.spacexdata.com/**', (req, res) => {
-    res.sendFile(join(distFolder, 'browser', 'index.html'));
-  });
+  // server.get('https://api.spacexdata.com/**', (req, res) => {
+  //   res.sendFile(join(distFolder, 'browser', 'index.html'));
+  // });
 
   // All regular routes use the Universal engine
   const routes = [
@@ -46,7 +46,7 @@ export function app(): express.Express {
     let OS = 'DESKTOP';
     if (ua) {
       const uaParser = new UAParser(ua);
-      OS = uaParser.getOS().name === 'Android' ? 'MOBILE' : 'DESKTOP';
+      OS = uaParser.getOS().name === 'Android' || uaParser.getOS().name === 'iOS' ? 'MOBILE' : 'DESKTOP';
     }
     res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }, { provide: 'UserAgent', useValue: OS }] });
   });

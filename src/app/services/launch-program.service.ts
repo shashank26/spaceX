@@ -21,7 +21,10 @@ export class LaunchProgramService {
     constructor(private http: HttpClient, private injector: Injector, @Inject(PLATFORM_ID) private platformId: any) {
         if (isPlatformBrowser(platformId)) {
             const uaParser = new UAParser(window.navigator.userAgent);
-            this.browserType = uaParser.getOS().name === 'Android' ? 'MOBILE' : 'DESKTOP';
+            this.browserType =
+                uaParser.getOS().name === 'Android' ||
+                    uaParser.getOS().name === 'iOS'
+                    ? 'MOBILE' : 'DESKTOP';
         } else {
             this.browserType = this.injector.get('UserAgent');
         }
@@ -29,10 +32,7 @@ export class LaunchProgramService {
 
     async getLaunchPrograms(limit: number, offset: number, filters: any, loadMore: boolean = false): Promise<void> {
         try {
-            let queryParamString = '';
-            if (filters) {
-                queryParamString = '&' + this.getFilterQueryString(filters);
-            }
+            let queryParamString = this.getFilterQueryString(filters);
             const response = await this.http.get<any[]>(`https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}${queryParamString}`).toPromise();
             const behaviorSubject =
                 this.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
@@ -59,7 +59,10 @@ export class LaunchProgramService {
 
     private getFilterQueryString(filters: any): string {
         const queryString = Reflect.ownKeys(filters).map((k) => `${String(k)}=${filters[k]}`);
-        return queryString.join('&');
+        if (queryString.length > 0) {
+            return '&' + queryString.join('&');
+        }
+        return '';
     }
 
     private wasLandingSuccessful(rocket: any): boolean {
