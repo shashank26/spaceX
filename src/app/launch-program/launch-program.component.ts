@@ -1,5 +1,5 @@
 import { isPlatformServer } from '@angular/common';
-import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as e from 'express';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -23,17 +23,11 @@ export class LaunchProgramComponent implements OnInit {
   
 
   constructor(private launchProgramService: LaunchProgramService,
-    private activatedRoute: ActivatedRoute,
-    @Inject(PLATFORM_ID) private platformId: any) {
+    private activatedRoute: ActivatedRoute) {
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
-
-    if (isPlatformServer(this.platformId)) {
-      this.showItems = false;
-    } else {
-      this.showItems = true;
-    }
+    
     this.launchProgramData =
       this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
   }
