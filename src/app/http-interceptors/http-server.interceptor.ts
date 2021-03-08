@@ -1,8 +1,8 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { makeStateKey, TransferState } from '@angular/platform-browser';
-import { Observable } from "rxjs";
-import { tap } from "rxjs/operators";
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -19,5 +19,4 @@ export class HttpServerInterceptor implements HttpInterceptor {
             })
         );
     }
-
 }

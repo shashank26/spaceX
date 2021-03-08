@@ -5,13 +5,6 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './launch-info.component.html',
   styleUrls: ['./launch-info.component.scss']
 })
-export class LaunchInfoComponent implements OnInit {
-
+export class LaunchInfoComponent {
   @Input() title = '';
-  
-  constructor() { 
-  }
-
-  ngOnInit(): void {
-  }
 }

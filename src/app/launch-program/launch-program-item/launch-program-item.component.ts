@@ -6,7 +6,7 @@ import { LaunchProgramModel } from 'src/app/models/launch-program.model';
   templateUrl: './launch-program-item.component.html',
   styleUrls: ['./launch-program-item.component.scss']
 })
-export class LaunchProgramItemComponent implements OnInit {
+export class LaunchProgramItemComponent {
 
   @Input() info: any;
   mapKeys: string[] = [];
@@ -18,15 +18,12 @@ export class LaunchProgramItemComponent implements OnInit {
     ['successfulLanding', 'Successful Landing'],
   ]);
 
-  constructor() { 
+  constructor() {
     this.mapKeys = Array.from(this.fieldToLabelMap.keys());
   }
 
-  ngOnInit(): void {
-  }
-
-  isValueOfTypeArray(value: any) {
+  isValueOfTypeArray(value: any): boolean {
     return Array.isArray(value);
   }
-
 }
+

@@ -38,10 +38,11 @@ export function app(): express.Express {
   const routes = [
     '/',
     '/launch-programs',
-  ]
+  ];
+
   server.get(routes, (req, res) => {
 
-    let ua = req.headers['user-agent'];
+    const ua = req.headers['user-agent'];
     let OS = 'DESKTOP';
     if (ua) {
       const uaParser = new UAParser(ua);

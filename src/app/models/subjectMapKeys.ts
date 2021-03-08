@@ -1,4 +1,4 @@
 export const subjectMapKeys = {
     LAUNCH_PROGRAMS : 'LAUNCH_PROGRAMS',
     FILTERED_LAUNCH_PROGRAMS : 'FILTERED_LAUNCH_PROGRAMS'
-}
+};

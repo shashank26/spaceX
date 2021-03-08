@@ -23,7 +23,6 @@ import { HttpServerInterceptor } from './http-interceptors/http-server.intercept
   bootstrap: [AppComponent],
 })
 export class AppServerModule {
-  constructor() {
-    
-  }
+
 }
+

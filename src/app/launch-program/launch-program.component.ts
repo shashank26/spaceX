@@ -10,23 +10,24 @@ import { LaunchProgramService } from '../services/launch-program.service';
   templateUrl: './launch-program.component.html',
   styleUrls: ['./launch-program.component.scss']
 })
-export class LaunchProgramComponent implements OnInit {  
+export class LaunchProgramComponent implements OnInit {
 
   isLoading = false;
   launchProgramData: Observable<LaunchProgramModel[]> = of([]);
-  private offset = 0
+  private offset = 0;
   private limit = 10;
   private filters = {};
 
-  
-  constructor(private launchProgramService: LaunchProgramService, private activatedRoute: ActivatedRoute) { 
+
+  constructor(private launchProgramService: LaunchProgramService, private activatedRoute: ActivatedRoute) {
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
-    this.launchProgramData = <BehaviorSubject<LaunchProgramModel[]>>this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS);
+    this.launchProgramData =
+      this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(e => {
       this.offset = 0;
       this.filters = e;
@@ -34,11 +35,11 @@ export class LaunchProgramComponent implements OnInit {
     });
   }
 
-  async loadMoreData() {
+  async loadMoreData(): Promise<void> {
     this.isLoading = true;
     this.offset++;
     await this.launchProgramService.getLaunchPrograms(this.limit, this.offset * this.limit, this.filters, true);
     this.isLoading = false;
   }
-
 }
+

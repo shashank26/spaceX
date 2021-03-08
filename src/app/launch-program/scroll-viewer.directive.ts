@@ -3,7 +3,7 @@ import { Directive, EventEmitter, HostBinding, HostListener, Output } from '@ang
 @Directive({
   selector: '[appScrollViewer]'
 })
-export class ScrollViewerDirective {  
+export class ScrollViewerDirective {
 
   @Output() loadMoreData = new EventEmitter<void>();
   eventEmitted = false;
@@ -11,7 +11,7 @@ export class ScrollViewerDirective {
   constructor() { }
 
   @HostListener('window:scroll')
-  onScroll() {
+  onScroll(): void {
     if (!this.eventEmitted && (window.scrollY + window.innerHeight) >= document.body.offsetHeight) {
       this.eventEmitted = true;
       this.loadMoreData.emit();
