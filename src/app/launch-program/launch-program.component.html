@@ -1,4 +1,4 @@
-<div class="grid-container" appScrollViewer (loadMoreData)="loadMoreData()">
+<div class="grid-container" appScrollViewer (loadMoreData)="loadMoreData()" [ngStyle]="{'display': showItems ? 'grid' : 'none'}">
     <app-launch-program-item *ngFor="let info of launchProgramData | async" [info]='info'></app-launch-program-item>
 </div>
 <div class="loading text-center" *ngIf="isLoading">
