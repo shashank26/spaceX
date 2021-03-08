@@ -32,7 +32,7 @@ export class LaunchProgramService {
 
     async getLaunchPrograms(limit: number, offset: number, filters: any, loadMore: boolean = false): Promise<void> {
         try {
-            let queryParamString = this.getFilterQueryString(filters);
+            const queryParamString = this.getFilterQueryString(filters);
             const response = await this.http.get<any[]>(`https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}${queryParamString}`).toPromise();
             const behaviorSubject =
                 this.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
