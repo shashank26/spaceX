@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
+import { UAParser } from 'ua-parser-js';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
@@ -29,9 +30,24 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+  server.get('https://api.spacexdata.com/**', (req, res) => {
+    res.sendFile(join(distFolder, 'browser', 'index.html'));
+  });
+
   // All regular routes use the Universal engine
-  server.get('*', (req, res) => {
-    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }] });
+  const routes = [
+    '/',
+    '/launch-programs',
+  ]
+  server.get(routes, (req, res) => {
+
+    let ua = req.headers['user-agent'];
+    let OS = 'DESKTOP';
+    if (ua) {
+      const uaParser = new UAParser(ua);
+      OS = uaParser.getOS().name === 'Android' ? 'MOBILE' : 'DESKTOP';
+    }
+    res.render(indexHtml, { req, providers: [{ provide: APP_BASE_HREF, useValue: req.baseUrl }, { provide: 'UserAgent', useValue: OS }] });
   });
 
   return server;

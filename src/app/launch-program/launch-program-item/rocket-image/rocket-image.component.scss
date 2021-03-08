@@ -1,0 +1,8 @@
+@import './../../../../variables.scss';
+
+figure {
+    background: lightgray;
+    width: var(--figure-width);
+    height: var(--figure-width);
+    margin-bottom: 10px;
+}

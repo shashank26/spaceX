@@ -1,0 +1,33 @@
+<app-box>
+    <label for="toggle-filter" class="filter-toggle">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+    <input type="checkbox" id="toggle-filter"/>
+    <div class="filter">
+        <h3>Filters</h3> <button routerLink="/launch-programs">Clear</button>
+        <app-filter-template [filterName]="'Launch Year'">
+            <div class="btn-group">
+                <button *ngFor="let year of years" class="green" routerLinkActive="active" routerLink="/launch-programs"
+                    queryParamsHandling="merge" [queryParams]="{'launch_year' : year}">{{year}}</button>
+            </div>
+        </app-filter-template>
+        <app-filter-template [filterName]="'Successful Launch'">
+            <div class="btn-group">
+                <button routerLinkActive="active" routerLink="/launch-programs" queryParamsHandling="merge"
+                    [queryParams]="{'launch_success' : true}" class="green">True</button>
+                <button routerLinkActive="active" routerLink="/launch-programs" queryParamsHandling="merge"
+                    [queryParams]="{'launch_success' : false}" class="green">False</button>
+            </div>
+        </app-filter-template>
+        <app-filter-template [filterName]="'Successful Landing'">
+            <div class="btn-group">
+                <button routerLinkActive="active" routerLink="/launch-programs" queryParamsHandling="merge"
+                    [queryParams]="{'land_success' : true}" class="green">True</button>
+                <button routerLinkActive="active" routerLink="/launch-programs" queryParamsHandling="merge"
+                    [queryParams]="{'land_success' : false}" class="green">False</button>
+            </div>
+        </app-filter-template>
+    </div>
+</app-box>

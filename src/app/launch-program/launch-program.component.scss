@@ -1,0 +1,27 @@
+@import './../../variables.scss';
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), var(--app-box-width));
+    grid-gap: 10px 10px;
+}
+
+.loading {
+    margin: 0 auto;
+    .rotator {
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        border-top: 5px solid #333;
+        animation: rotate 0.3s infinite linear;
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

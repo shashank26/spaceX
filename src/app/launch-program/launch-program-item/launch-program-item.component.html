@@ -1,0 +1,19 @@
+<app-box>
+    <app-rocket-image [image]='info.image' [flightNumber]='info.flightNumber' [missionName]='info.missionName'>
+    </app-rocket-image>
+    <div *ngFor="let key of mapKeys" class="margin-t-b">
+        <app-launch-info [title]='fieldToLabelMap.get(key) || key'>
+            <ng-container *ngIf="isValueOfTypeArray(info[key]); then list; else single">
+            </ng-container>
+
+            <ng-template #list>
+                <ul>
+                    <li *ngFor="let item of info[key]">{{item}}</li>
+                </ul>
+            </ng-template>
+            <ng-template #single>
+                {{info[key]}}
+            </ng-template>
+        </app-launch-info>
+    </div>
+</app-box>

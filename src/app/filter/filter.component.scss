@@ -1,0 +1,57 @@
+button.green {
+    background: rgb(197, 224, 153);
+}
+
+button {
+    border: 0px;
+    padding: 5px;
+    width: 60px;
+    border-radius: 5px;
+    justify-self: center;
+}
+
+button {
+    cursor: pointer;
+    outline: none;
+}
+
+button:active {
+    box-shadow: 0 0 5px #333 inset;
+}
+
+button.green.active {
+    background: rgb(124, 186, 1);
+}
+
+.btn-group {
+    width: 100%;
+    display: grid;
+    grid-gap: 10px 30px;
+    grid-template-columns: auto auto;
+}
+
+.filter-toggle {
+    display: none;
+    margin: 10px 0;
+    cursor: pointer;
+    div {
+        height: 2px;
+        margin-top: 2px;
+        width: 20px;
+        background: black;
+    }
+}
+
+@media (max-width: 699px) {
+    .filter-toggle {
+        display: block;
+    }
+    #toggle-filter:checked + div.filter {
+        display: none;
+    }
+}
+
+.filter-toggle+#toggle-filter {
+    display: none;
+}
+

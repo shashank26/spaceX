@@ -1,0 +1,35 @@
+@media (min-width: 1441px){
+    :root {
+        --main-container-width: 1440px;
+        --app-box-width: 270px;
+        --figure-width: 230px;
+        --columns: 4;
+    }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px){
+    :root {
+        --main-container-width: 100vw;
+        --app-box-width: calc(90vw / 5);
+        --figure-width: calc(var(app-box-width) - 20px);
+        --columns: 4;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1023px){
+    :root {
+        --main-container-width: 100vw;
+        --app-box-width: calc(90vw / 3);
+        --figure-width: calc(var(app-box-width) - 20px);
+        --columns: 2;
+    }
+}
+
+@media (max-width: 699px) {
+    :root {
+        --main-container-width: 100vw;
+        --app-box-width: 90vw;
+        --figure-width: calc(var(app-box-width) - 20px);
+        --columns: 1;
+    }
+}

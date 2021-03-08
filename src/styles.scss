@@ -1,1 +1,69 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'variables.scss';
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+hr,
+figure,
+ul {
+    margin: 0px;
+}
+
+body {
+    background: rgb(242, 242, 242);
+    padding-bottom: 50px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.small-font-size {
+    font-size: 0.95em;
+}
+
+.positioned-bottom {
+    position: fixed;
+    bottom: 0px;
+}
+
+.thin-text {
+    font-weight: 200;
+    font-size: 0.8em;
+}
+
+.blue-text {
+    color: rgb(69, 80, 140);
+}
+
+.heavy-font {
+    font-weight: bold;
+}
+
+.margin-t-b {
+    margin: 5px 0;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+footer {
+    padding: 10px;
+    box-sizing: border-box;
+    height: 40px;
+    background: #fff;
+    box-shadow: 0 5px 5px #eee;
+    width: 100%;
+}

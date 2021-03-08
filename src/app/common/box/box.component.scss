@@ -1,0 +1,17 @@
+
+// @import './../../../variables.scss';
+
+.box-container{
+    width: var(--app-box-width);
+    box-sizing: border-box;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 4px #ccc;
+    background: #fff;
+    display: inline-block;
+}
+
+.launch-grid-container .box-container {
+    height: 100%;
+}
+

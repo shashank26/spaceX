@@ -168,7 +168,7 @@
             "browserTarget": "spaceX:build:production",
             "serverTarget": "spaceX:server:production",
             "routes": [
-              "/"
+              "/home-page"
             ]
           },
           "configurations": {
