@@ -30,9 +30,9 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
-  // server.get('https://api.spacexdata.com/**', (req, res) => {
-  //   res.sendFile(join(distFolder, 'browser', 'index.html'));
-  // });
+  server.get('https://api.spacexdata.com/**', (req, res) => {
+    res.sendFile(join(distFolder, 'browser', 'index.html'));
+  });
 
   // All regular routes use the Universal engine
   const routes = [
