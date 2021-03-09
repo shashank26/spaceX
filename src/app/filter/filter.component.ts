@@ -21,10 +21,10 @@ export class FilterComponent implements OnInit {
       e.keys.forEach(k => {
         this.filters[k] = this.activeRoute.snapshot.queryParamMap.get(k);
       });
-    })
+    });
   }
 
-  navigateTo(key: any, value: any) {
+  navigateTo(key: any, value: any): void {
     const val = this.filters[key];
     if (val === String(value)) {
       delete this.filters[key];
