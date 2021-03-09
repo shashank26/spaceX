@@ -1,5 +1,5 @@
 <div class="grid-container" appScrollViewer (loadMoreData)="loadMoreData()">
-    <app-launch-program-item *ngFor="let info of launchProgramData" [info]='info'></app-launch-program-item>
+    <app-launch-program-item *ngFor="let info of getDataLaunchProgramData()" [info]='info'></app-launch-program-item>
 </div>
 <div class="loading text-center" *ngIf="isLoading">
     <div class="rotator inline-block"></div>

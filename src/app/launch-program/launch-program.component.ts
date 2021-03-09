@@ -24,9 +24,6 @@ export class LaunchProgramComponent implements OnInit {
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
-
-    this.launchProgramData =
-      this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
   }
 
   ngOnInit(): void {
@@ -43,6 +40,13 @@ export class LaunchProgramComponent implements OnInit {
       this.launchProgramService.getLaunchPrograms(this.limit, this.offset, this.filters);
     });
   }
+
+  getDataLaunchProgramData(): LaunchProgramModel[] {
+    return this.launchProgramData.length > 0 ?
+      this.launchProgramData :
+      this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
+  }
+
 
   async loadMoreData(): Promise<void> {
     this.isLoading = true;
