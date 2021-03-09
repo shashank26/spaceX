@@ -30,9 +30,7 @@ export class LaunchProgramComponent implements OnInit {
   ngOnInit(): void {
 
     this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS)?.subscribe(data => {
-      if (data.length > 0) {
         this.launchProgramData = data;
-      }
     });
 
     this.activatedRoute.queryParams.subscribe(params => {

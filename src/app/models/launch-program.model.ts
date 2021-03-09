@@ -4,6 +4,6 @@ export interface LaunchProgramModel {
     flightNumber: number;
     missionIds: string[];
     launchYear: number;
-    successfulLaunch: boolean;
-    successfulLanding: boolean;
+    successfulLaunch: any;
+    successfulLanding: any;
 }
