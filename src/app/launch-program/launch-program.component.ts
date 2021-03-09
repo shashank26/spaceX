@@ -24,8 +24,9 @@ export class LaunchProgramComponent implements OnInit {
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
-    
-    this.launchProgramData = this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
+
+    this.launchProgramData =
+      this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
   }
 
   ngOnInit(): void {
