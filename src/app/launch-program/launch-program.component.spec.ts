@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { subjectMapKeys } from '../models/subjectMapKeys';
 import { LaunchProgramService } from '../services/launch-program.service';
 
 import { LaunchProgramComponent } from './launch-program.component';
@@ -34,7 +35,7 @@ describe('LaunchProgramComponent', () => {
   it('should load data', async (done) => {
     const lsp = fixture.debugElement.injector.get(LaunchProgramService);
     await component.loadMoreData();
-    component.launchProgramData.subscribe(data => {
+    lsp.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS)?.subscribe(data => {
       expect(data.length).toBeGreaterThanOrEqual(1);
       done();
     });
