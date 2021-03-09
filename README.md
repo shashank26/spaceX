@@ -1,3 +1,8 @@
+### NOTE: 
+ Lighthouse reports can be downloaded from the main branch of the repository.
+  1. lighthouse_desktop.pdf
+  2. lighthouse_mobile.pdf
+
 # SpaceX
 
 This project is made with angular and implements Server Side Rendering, one thing that I couldn't resolve was the initial flickering that happens when loading tha app for first time the page is rendered server side and I am using TransferState to retrieve the cached data, however, still it is flickering twice may be because the component re renders itself and during that split second all the variables are initialized and the data variable is set to empty array before rceiving the TrasferState data.
