@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TransferState } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { subjectMapKeys } from '../models/subjectMapKeys';
 import { LaunchProgramService } from '../services/launch-program.service';
@@ -16,7 +17,7 @@ describe('LaunchProgramComponent', () => {
         RouterTestingModule,
         HttpClientModule
       ],
-      providers: [LaunchProgramService, HttpClient],
+      providers: [LaunchProgramService, HttpClient, TransferState],
       declarations: [LaunchProgramComponent]
     })
       .compileComponents();

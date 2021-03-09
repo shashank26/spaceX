@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TransferState } from '@angular/platform-browser';
 import { LaunchProgramService } from 'src/app/services/launch-program.service';
 
 import { LaunchProgramItemComponent } from './launch-program-item.component';
@@ -11,7 +12,7 @@ describe('LaunchProgramItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [LaunchProgramService, HttpClient],
+      providers: [LaunchProgramService, HttpClient, TransferState],
       declarations: [LaunchProgramItemComponent]
     })
       .compileComponents();
