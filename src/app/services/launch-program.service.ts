@@ -41,21 +41,29 @@ export class LaunchProgramService {
             const queryParamString = this.getFilterQueryString(filters);
             const url = `https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}${queryParamString}`;
             const response = await this.http.get<any[]>(url).toPromise();
-            const behaviorSubject =
-                this.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
-            const prevVal = loadMore ? behaviorSubject.getValue() : [];
-            behaviorSubject.next(prevVal.concat(this.converter.responseToLaunchModel(response)));
+            this.emitCollatedData(response, loadMore);
         } catch (e) {
             return e;
         }
     }
 
-    public getInitialDataFromState(limit: number, offset: number, filters: any): LaunchProgramModel[] {
+    public getInitialDataFromState(limit: number, offset: number, filters: any): void {
         const queryParamString = this.getFilterQueryString(filters);
         const url = `https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}${queryParamString}`;
-        return (
-            this.state.get(makeStateKey(url), [])
-        );
+        const behaviorSubject =
+            this.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
+        behaviorSubject.next(this.state.get(makeStateKey(url), []));
+    }
+
+    private emitCollatedData(response: any, loadMore: boolean): void {
+        const behaviorSubject =
+            this.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
+        let prevData: LaunchProgramModel[] = [];
+        const prevValue = behaviorSubject.getValue();
+        if (loadMore) {
+            prevData = prevValue;
+        }
+        behaviorSubject.next(prevData.concat(this.converter.responseToLaunchModel(response)));
     }
 
     private getFilterQueryString(filters: any): string {

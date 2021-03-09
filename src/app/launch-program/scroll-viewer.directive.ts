@@ -10,6 +10,14 @@ export class ScrollViewerDirective {
 
   constructor() { }
 
+  @HostListener('window:load')
+  onLoad(): void {
+    if (!this.eventEmitted && (window.scrollY + window.innerHeight) >= document.body.offsetHeight) {
+      this.eventEmitted = true;
+      this.loadMoreData.emit();
+    }
+  }
+
   @HostListener('window:scroll')
   onScroll(): void {
     if (!this.eventEmitted && (window.scrollY + window.innerHeight) >= document.body.offsetHeight) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LaunchProgramModel } from '../models/launch-program.model';
 import { subjectMapKeys } from '../models/subjectMapKeys';
@@ -12,7 +12,7 @@ import { LaunchProgramService } from '../services/launch-program.service';
 export class LaunchProgramComponent implements OnInit {
 
   isLoading = false;
-  launchProgramData: LaunchProgramModel[] = [];
+  @Input() launchProgramData: LaunchProgramModel[] = [];
   showItems = true;
   private offset = 0;
   private limit = 10;
@@ -21,6 +21,7 @@ export class LaunchProgramComponent implements OnInit {
 
   constructor(private launchProgramService: LaunchProgramService,
               private activatedRoute: ActivatedRoute) {
+    this.getDataLaunchProgramData();
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
@@ -41,10 +42,8 @@ export class LaunchProgramComponent implements OnInit {
     });
   }
 
-  getDataLaunchProgramData(): LaunchProgramModel[] {
-    return this.launchProgramData.length > 0 ?
-      this.launchProgramData :
-      this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
+  getDataLaunchProgramData(): void {
+    this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
   }
 
 
