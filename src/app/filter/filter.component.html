@@ -6,7 +6,7 @@
     </label>
     <input type="checkbox" id="toggle-filter" />
     <div class="filter">
-        <h3>Filters</h3> <button routerLink="/launch-programs">Clear</button>
+        <h3>Filters</h3>
         <app-filter-template [filterName]="'Launch Year'">
             <div class="btn-group">
                 <button *ngFor="let year of years" class="green" [ngClass]="{'active' : filters['launch_year'] === year + ''}" (click)="navigateTo('launch_year', year)">{{year}}</button>
