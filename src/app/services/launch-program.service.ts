@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { LaunchProgramModel } from '../models/launch-program.model';
 import { subjectMapKeys } from '../models/subjectMapKeys';
 import { UAParser } from 'ua-parser-js';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
 
 @Injectable({
     providedIn: 'root',
@@ -18,8 +19,11 @@ export class LaunchProgramService {
         [subjectMapKeys.FILTERED_LAUNCH_PROGRAMS, new BehaviorSubject<LaunchProgramModel[]>([])],
     ]);
 
-    constructor(private http: HttpClient, private injector: Injector, @Inject(PLATFORM_ID) private platformId: any) {
-        if (isPlatformBrowser(platformId)) {
+    constructor(private http: HttpClient,
+                private injector: Injector,
+                @Inject(PLATFORM_ID) private platformId: any,
+                private state: TransferState) {
+        if (isPlatformBrowser(this.platformId)) {
             const uaParser = new UAParser(window.navigator.userAgent);
             this.browserType =
                 uaParser.getOS().name === 'Android' ||
@@ -55,6 +59,14 @@ export class LaunchProgramService {
                 successfulLanding: this.wasLandingSuccessful(r.rocket.first_stage),
             };
         });
+    }
+
+    public getInitialDataFromState(limit: number, offset: number, filters: any): LaunchProgramModel[] {
+        const queryParamString = this.getFilterQueryString(filters);
+        const url = `https://api.spacexdata.com/v3/launches?limit=${limit}&offset=${offset}${queryParamString}`;
+        return (
+            this.state.get(makeStateKey(url), []) as LaunchProgramModel[]
+        );
     }
 
     private getFilterQueryString(filters: any): string {

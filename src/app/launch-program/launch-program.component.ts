@@ -1,8 +1,5 @@
-import { isPlatformServer } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import * as e from 'express';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { LaunchProgramModel } from '../models/launch-program.model';
 import { subjectMapKeys } from '../models/subjectMapKeys';
 import { LaunchProgramService } from '../services/launch-program.service';
@@ -15,28 +12,34 @@ import { LaunchProgramService } from '../services/launch-program.service';
 export class LaunchProgramComponent implements OnInit {
 
   isLoading = false;
-  launchProgramData: Observable<LaunchProgramModel[]> = of([]);
+  launchProgramData: LaunchProgramModel[] = [];
   showItems = true;
   private offset = 0;
   private limit = 10;
   private filters = {};
-  
+
 
   constructor(private launchProgramService: LaunchProgramService,
-    private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute) {
     if (this.launchProgramService.browserType === 'MOBILE') {
       this.limit = 4;
     }
     
-    this.launchProgramData =
-      this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS) as BehaviorSubject<LaunchProgramModel[]>;
+    this.launchProgramData = this.launchProgramService.getInitialDataFromState(this.limit, this.offset, this.activatedRoute.snapshot.queryParams);
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(e => {
+
+    this.launchProgramService.launchProgramsSubjectMap.get(subjectMapKeys.LAUNCH_PROGRAMS)?.subscribe(data => {
+      if (data.length > 0) {
+        this.launchProgramData = data;
+      }
+    });
+
+    this.activatedRoute.queryParams.subscribe(params => {
       this.offset = 0;
-      this.filters = e;
-      this.launchProgramService.getLaunchPrograms(this.limit, this.offset, e);
+      this.filters = params;
+      this.launchProgramService.getLaunchPrograms(this.limit, this.offset, this.filters);
     });
   }
 
